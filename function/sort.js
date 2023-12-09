@@ -8,6 +8,8 @@ let sort = {
     placeofbirth:false,
     alignement:false
 }
+// chaque fonction si dessous permettes de comparer a et b et renvoye -1 , 1 , 0 
+// en fonction de la situation (elle gere la donner du même nom)
 function name(a,b){
     if (a.name == undefined || a.name == null) return 1
     if (b.name == undefined || b.name == null) return -1
@@ -70,6 +72,9 @@ function stats(a,b){
     if (statsa > statsb) return 1
     return 0
 }
+
+// chaque fonction si dessous permettes de renvoyer la table heroes trier
+// selon l'ordre demander descroissant et croissant (elle gere la donner du même nom)
 export function sortName(tabHeros){
     tabHeros.sort(name)
     // console.log(tabHeros)
@@ -243,6 +248,8 @@ export function sortStats(tabHeros){
     return tabHeros
 }
 
+// permet de mettre les hero don il manque l'information de la colonne 
+// trier actuellement en fin de tab
 function sorting(heroes,func){
     let limite = heroes.length
     for (let index = 0;index<limite;index++){

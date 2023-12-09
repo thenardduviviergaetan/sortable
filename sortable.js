@@ -9,7 +9,9 @@ import { checkDataList } from './function/checker.js';
 import { sortGender,sortName,sortRace,sortFullName, sortHeight, sortWeight, sortPlaceOfBirth, sortAlignement, sortStats } from './function/sort.js';
 import { newcol , newimg, newline } from './function/new.js';
 
+// permet d'inserer les donner des heros dans la page
 const loadData = (heroes,max) => {
+  // checkFilter retourne un tableaux de hero qui corespond a la recherche 
   cacheHeros = checkFilter(heroes)
   // cacheHeros = sorting(heroes)
   nbhero = cacheHeros.length
@@ -20,7 +22,8 @@ const loadData = (heroes,max) => {
     while (element.firstChild) {
         element.removeChild(element.firstChild);
     }
-
+    // function acceptant une fonction de trie en entrer elle permet
+    // de mettre en place le trie des différente colonne
     const addEvent = (func) => {
       thead.lastChild.addEventListener("click",()=>{
       cacheHeros = func(cacheHeros)
@@ -33,6 +36,7 @@ const loadData = (heroes,max) => {
     })}
 
     let index=amin
+    //creation de la table et de la tête des colonne ainsi que lors fonction
     let table = document.createElement("table")
     element.appendChild(table)
     let thead = document.createElement("thead")
@@ -145,9 +149,11 @@ const loadData = (heroes,max) => {
     let tbody = document.createElement("tbody")
     table.appendChild(tbody)
 
+    //insertion des information des heros selectioner et stocker dans la table cacheheros
     for (index;index<amax;index++){
         let hero = document.createElement("tr")
         hero.id = index
+        // permet de créer en cliquant sur la ligne une fenetre contenant la fiche du personage 
         hero.addEventListener("click",() => {
           console.log(cacheHeros[hero.id])
           let fiche = window.open("","","toolbar=no,width=400, height=800,resizable=non");
@@ -192,84 +198,66 @@ const loadData = (heroes,max) => {
         stats.appendChild(newline("durability : "+cacheHeros[index].powerstats.durability))
         stats.appendChild(newline("power : "+cacheHeros[index].powerstats.power))
         stats.appendChild(newline("combat : "+cacheHeros[index].powerstats.combat))
-        // stats.appendChild(newline(cacheHeros[index].powerstats.intelligence))
         hero.appendChild(stats)
-        // let element = cacheHeros[0].powerstats
-        // console.log(element.intelligence)
-        // console.log(element.strength)
-        // console.log(element.speed)
-        // console.log(element.durability)
-        // console.log(element.power)
-        // console.log(element.combat)
         hero.appendChild(newcol(cacheHeros[index].appearance.race))
         hero.appendChild(newcol(cacheHeros[index].appearance.gender))
         hero.appendChild(newcol(cacheHeros[index].appearance.height[1]))
         hero.appendChild(newcol(cacheHeros[index].appearance.weight[1]))
         hero.appendChild(newcol(cacheHeros[index].biography.placeOfBirth))
         hero.appendChild(newcol(cacheHeros[index].biography.alignment))
-
-        // hero.appendChild(newimg(heroes[index].images.xs))
-        // hero.appendChild(newcol(heroes[index].name))
-        // hero.appendChild(newcol(heroes[index].appearance.race))
-        // hero.appendChild(newcol(heroes[index].appearance.gender))
-        // hero.appendChild(newcol(heroes[index].appearance.height[1]))
-        // hero.appendChild(newcol(heroes[index].appearance.weight[1]))
-        // hero.appendChild(newcol(heroes[index].biography.placeOfBirth))
-        // hero.appendChild(newcol(heroes[index].biography.alignment))
-
-
-
-        // hero.appendChild(newbtn(btn))
         tbody.appendChild(hero)
-        // tbody.appendChild(btn)
     }
   }
 
-const insert = document.querySelector("#nb");
-insert.addEventListener("click", () => {
-  const positionSelect = insert
-  amin = 0;
-  amax = (positionSelect.value !== "all results") ? parseInt(positionSelect.value) : positionSelect.value
-  // document.querySelector("#pos").textContent = `${amin} - ${amax}`
-  // render(amax)
-  loadData(cacheHeros,amax)
-});
-const filter = document.querySelector("#filter");
-filter.addEventListener("keydown", ()=> {
-  amin = 0;
-  amax = parseInt(document.querySelector("#nb").value)
-  // document.querySelector("#pos").textContent = `${amin} - ${amax}`
-  render(amax)
-});
-const left = document.querySelector("#left");
-left.addEventListener("click", ()=> {
-  if (document.querySelector("#nb").value == "all results") return
-  if(amax == nbhero){
-    amax = amin
-    amin -= parseInt(document.querySelector("#nb").value)
-  }else if (amin != 0){
-    amin -= parseInt(document.querySelector("#nb").value)
-    amax -= parseInt(document.querySelector("#nb").value)
-  }
-  // document.querySelector("#pos").textContent = `${amin} - ${amax}`
-  loadData(cacheHeros,amax)
-});
-const right = document.querySelector("#right");
-right.addEventListener("click", ()=> {
-  if (document.querySelector("#nb").value == "all results") return
-  if (amax < nbhero){
-    console.log("<")
-    amin += parseInt(document.querySelector("#nb").value)
-    amax += parseInt(document.querySelector("#nb").value)
-  }else if (amax > nbhero){
-    amin += parseInt(document.querySelector("#nb").value)
-    amax = tab.length
-  }
-  // document.querySelector("#pos").textContent = `${amin} - ${amax}`
-  // render(amax)
-  loadData(cacheHeros,amax)
-});
-
+// mis en place des different event pour les boutton et la searchbar
+// systeme pour les pages
+  const insert = document.querySelector("#nb");
+  insert.addEventListener("click", () => {
+    const positionSelect = insert
+    amin = 0;
+    amax = (positionSelect.value !== "all results") ? parseInt(positionSelect.value) : positionSelect.value
+    // document.querySelector("#pos").textContent = `${amin} - ${amax}`
+    // render(amax)
+    loadData(cacheHeros,amax)
+  });
+  const left = document.querySelector("#left");
+  left.addEventListener("click", ()=> {
+    if (document.querySelector("#nb").value == "all results") return
+    if(amax == nbhero){
+      amax = amin
+      amin -= parseInt(document.querySelector("#nb").value)
+    }else if (amin != 0){
+      amin -= parseInt(document.querySelector("#nb").value)
+      amax -= parseInt(document.querySelector("#nb").value)
+    }
+    // document.querySelector("#pos").textContent = `${amin} - ${amax}`
+    loadData(cacheHeros,amax)
+  });
+  const right = document.querySelector("#right");
+  right.addEventListener("click", ()=> {
+    if (document.querySelector("#nb").value == "all results") return
+    if (amax < nbhero){
+      console.log("<")
+      amin += parseInt(document.querySelector("#nb").value)
+      amax += parseInt(document.querySelector("#nb").value)
+    }else if (amax > nbhero){
+      amin += parseInt(document.querySelector("#nb").value)
+      amax = tab.length
+    }
+    // document.querySelector("#pos").textContent = `${amin} - ${amax}`
+    // render(amax)
+    loadData(cacheHeros,amax)
+  });
+//searchbar
+  const filter = document.querySelector("#filter");
+  filter.addEventListener("keydown", ()=> {
+    amin = 0;
+    amax = parseInt(document.querySelector("#nb").value)
+    // document.querySelector("#pos").textContent = `${amin} - ${amax}`
+    render(amax)
+  });
+//function qui recupere les hero dans l'API et les envoie dans
+// la fonction loaddata pour y être traiter
 function render(amax){
   fetch('https://rawcdn.githack.com/akabab/superhero-api/0.2.0/api/all.json').then((response) => response.json()).then((heroes) => loadData(heroes,amax))
 }

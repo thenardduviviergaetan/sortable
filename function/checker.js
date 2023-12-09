@@ -58,13 +58,3 @@ export function checkDataList(research){
     data.value = str
     return data
   }
-
-// export function Isvide(value){
-//     if(!value.appearance.race        || value.appearance.race == '-' || value.appearance.race == ' ') return true
-//     if(!value.appearance.gender      || value.appearance.gender == '-' || value.appearance.gender == '') return true
-//     if(!value.appearance.height[1]   || value.appearance.height[1] == '-' || value.appearance.height[1] == '') return true
-//     if(!value.appearance.weight[1]   || value.appearance.weight[1] == '-' || value.appearance.weight[1] == '') return true
-//     if(!value.biography.placeOfBirth || value.biography.placeOfBirth == '-' || value.biography.placeOfBirth == '') return true
-//     if(!value.biography.alignment    || value.biography.alignment == '-' || value.biography.alignment == '') return true
-//     return false
-//   }
