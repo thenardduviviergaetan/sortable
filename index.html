@@ -4,15 +4,38 @@
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="sortable.js"></script>
 </head>
-<select id="nb">
-    <option>10</option>
-    <option selected>20</option>
-    <option>50</option>
-    <option>100</option>
-    <option>all results</option>
-  </select>
+<body>
+  <div class="pagination">
+    <div class="select-dropdown">
+      <select id="nb">
+        <option>10</option>
+        <option selected>20</option>
+        <option>50</option>
+        <option>100</option>
+        <option>all results</option>
+      </select>
+    </div>
+    <div id="selecteur">
+      <input type="button" id="left" value="<">
+      <div id="pos">0 - 20</div>
+      <input type="button" id="right" value=">">
+    </div>
+  </div>
+  <div class="filter">
+    <input type="text" id="filter" list="filter-tag">
+    <datalist id="filter-tag">
+      <!-- <option value="Name:"></option>
+      <option value="Race:"></option>
+      <option value="Gender:"></option>
+      <option value="Height:"></option>
+      <option value="Weight:"></option>
+      <option value="PlaceOfBirth:"></option>
+      <option value="Alignement:"></option> -->
+    </datalist>
+  </div>
   <!-- <button id="insert">valide</button> -->
   <!-- <button id="reset">Reset</button> -->
 <div id="table-heroes">
 
 </div>
+</body>
