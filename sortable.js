@@ -261,5 +261,7 @@ const loadData = (heroes,max) => {
 function render(amax){
   fetch('https://rawcdn.githack.com/akabab/superhero-api/0.2.0/api/all.json').then((response) => response.json()).then((heroes) => loadData(heroes,amax))
 }
+
+// appel de function pour initier la page
 checkDataList("")
 render(20)
